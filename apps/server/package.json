@@ -1,0 +1,20 @@
+{
+  "name": "@memedrop/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "start:render": "node src/start-render.js",
+    "bot": "node --watch src/bot.js",
+    "register:commands": "node src/register-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "ws": "^8.18.2"
+  }
+}

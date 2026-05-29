@@ -1,0 +1,19 @@
+{
+  "name": "memedrop-oasis",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Discord-powered desktop meme overlay.",
+  "workspaces": [
+    "apps/server",
+    "apps/overlay"
+  ],
+  "scripts": {
+    "dev:server": "npm --workspace apps/server run dev",
+    "dev:bot": "npm --workspace apps/server run bot",
+    "start:render": "npm --workspace apps/server run start:render",
+    "register:commands": "npm --workspace apps/server run register:commands",
+    "dev:overlay": "npm --workspace apps/overlay run dev",
+    "start:overlay": "npm --workspace apps/overlay run start",
+    "build:overlay": "npm --workspace apps/overlay run dist"
+  }
+}

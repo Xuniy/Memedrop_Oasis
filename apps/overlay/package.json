@@ -1,0 +1,33 @@
+{
+  "name": "@memedrop/overlay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Memedrop Oasis desktop overlay.",
+  "author": "Memedrop Oasis",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "app.memedrop.oasis",
+    "productName": "Memedrop Oasis",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "npmRebuild": false,
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": false
+    }
+  },
+  "devDependencies": {
+    "electron": "31.7.7",
+    "electron-builder": "^24.13.3"
+  }
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memedrop Oasis</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="settings" class="settings">
+      <header class="titlebar">
+        <div>
+          <p class="eyebrow">Memedrop Oasis</p>
+          <h1>Overlay Discord</h1>
+        </div>
+        <button id="hideSettings" class="icon-button" title="Masquer">x</button>
+      </header>
+
+      <section class="status-row">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText">Deconnecte</span>
+      </section>
+
+      <form id="settingsForm" class="form">
+        <label>
+          <span>Server URL</span>
+          <input id="serverUrl" name="serverUrl" placeholder="http://localhost:8787" autocomplete="off" />
+        </label>
+
+        <label>
+          <span>Client token</span>
+          <input id="clientToken" name="clientToken" placeholder="dev-client-token" autocomplete="off" />
+        </label>
+
+        <label>
+          <span>Room</span>
+          <input id="room" name="room" placeholder="default" autocomplete="off" />
+        </label>
+
+        <label>
+          <span>Position</span>
+          <select id="position" name="position">
+            <option value="top-right">Top right</option>
+            <option value="top-center">Top center</option>
+            <option value="top-left">Top left</option>
+            <option value="center">Center</option>
+            <option value="bottom-right">Bottom right</option>
+            <option value="bottom-center">Bottom center</option>
+            <option value="bottom-left">Bottom left</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Taille</span>
+          <select id="popupSize" name="popupSize">
+            <option value="small">Petite</option>
+            <option value="medium">Moyenne</option>
+            <option value="large">Grande</option>
+          </select>
+        </label>
+
+        <label class="toggle-row">
+          <input id="muted" type="checkbox" />
+          <span>Mute les drops</span>
+        </label>
+
+        <label class="toggle-row">
+          <input id="videoSound" type="checkbox" />
+          <span>Son des videos</span>
+        </label>
+
+        <label>
+          <span class="label-row">
+            <span>Volume video</span>
+            <output id="videoVolumeValue">50%</output>
+          </span>
+          <input id="videoVolume" type="range" min="0" max="100" step="5" />
+        </label>
+
+        <div class="actions">
+          <button type="submit">Enregistrer</button>
+          <button id="testPopup" type="button" class="secondary">Tester</button>
+        </div>
+      </form>
+    </main>
+
+    <section id="popup" class="popup" hidden>
+      <div class="popup-shell">
+        <div id="popupSender" class="popup-sender">Discord</div>
+        <img id="popupImage" alt="" hidden />
+        <video id="popupVideo" hidden playsinline></video>
+        <p id="popupText"></p>
+      </div>
+    </section>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

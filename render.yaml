@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: memedrop-oasis
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm run start:render
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.1
+      - key: HOST
+        value: 0.0.0.0
+      - key: DEFAULT_ROOM
+        value: default
+      - key: BOT_API_TOKEN
+        generateValue: true
+      - key: CLIENT_TOKEN
+        generateValue: true
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DISCORD_CLIENT_ID
+        sync: false
+      - key: DISCORD_GUILD_ID
+        sync: false
+      - key: ALLOWED_GUILD_ID
+        sync: false
+      - key: ALLOWED_CHANNEL_IDS
+        sync: false
