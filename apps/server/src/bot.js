@@ -160,4 +160,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-client.login(config.discordToken);
+client.login(config.discordToken).catch((error) => {
+  console.error("[memedrop] Discord login failed. Check DISCORD_TOKEN in your environment variables.");
+  console.error(error);
+  process.exit(1);
+});

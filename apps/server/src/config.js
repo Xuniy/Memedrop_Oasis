@@ -19,6 +19,10 @@ function listFromEnv(name) {
     .filter(Boolean);
 }
 
+function stringFromEnv(name, fallback = "") {
+  return (process.env[name] || fallback).trim();
+}
+
 const port = numberFromEnv("PORT", 8787);
 const defaultRelayUrl = process.env.RENDER
   ? `http://127.0.0.1:${port}`
@@ -26,17 +30,17 @@ const defaultRelayUrl = process.env.RENDER
 
 export const config = {
   port,
-  host: process.env.HOST || "0.0.0.0",
-  publicBaseUrl: process.env.PUBLIC_BASE_URL || "http://localhost:8787",
-  botApiToken: process.env.BOT_API_TOKEN || "dev-bot-token",
-  clientToken: process.env.CLIENT_TOKEN || "dev-client-token",
-  defaultRoom: process.env.DEFAULT_ROOM || "default",
-  discordToken: process.env.DISCORD_TOKEN || "",
-  discordClientId: process.env.DISCORD_CLIENT_ID || "",
-  discordGuildId: process.env.DISCORD_GUILD_ID || "",
-  allowedGuildId: process.env.ALLOWED_GUILD_ID || "",
+  host: stringFromEnv("HOST", "0.0.0.0"),
+  publicBaseUrl: stringFromEnv("PUBLIC_BASE_URL", "http://localhost:8787"),
+  botApiToken: stringFromEnv("BOT_API_TOKEN", "dev-bot-token"),
+  clientToken: stringFromEnv("CLIENT_TOKEN", "dev-client-token"),
+  defaultRoom: stringFromEnv("DEFAULT_ROOM", "default"),
+  discordToken: stringFromEnv("DISCORD_TOKEN"),
+  discordClientId: stringFromEnv("DISCORD_CLIENT_ID"),
+  discordGuildId: stringFromEnv("DISCORD_GUILD_ID"),
+  allowedGuildId: stringFromEnv("ALLOWED_GUILD_ID"),
   allowedChannelIds: listFromEnv("ALLOWED_CHANNEL_IDS"),
-  relayUrl: process.env.RELAY_URL || defaultRelayUrl
+  relayUrl: stringFromEnv("RELAY_URL", defaultRelayUrl)
 };
 
 export function warnAboutDevSecrets() {
