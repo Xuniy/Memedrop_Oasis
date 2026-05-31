@@ -35,9 +35,9 @@ const commands = [
     .addIntegerOption((option) =>
       option
         .setName("duration")
-        .setDescription("Duree en secondes.")
+        .setDescription("Duree en secondes. Texte/image: max 15. Video: 30 a 60.")
         .setMinValue(2)
-        .setMaxValue(15)
+        .setMaxValue(60)
         .setRequired(false)
     )
     .addStringOption((option) =>

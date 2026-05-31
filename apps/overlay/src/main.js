@@ -7,9 +7,8 @@ let tray;
 app.commandLine.appendSwitch("autoplay-policy", "no-user-gesture-required");
 
 function makeTrayIcon() {
-  return nativeImage.createFromDataURL(
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII="
-  );
+  const icon = nativeImage.createFromPath(path.join(__dirname, "..", "build", "icon.png"));
+  return icon.resize({ width: 16, height: 16 });
 }
 
 function createWindow() {
@@ -23,6 +22,7 @@ function createWindow() {
     resizable: false,
     show: false,
     alwaysOnTop: true,
+    icon: path.join(__dirname, "..", "build", "icon.ico"),
     backgroundColor: "#00000000",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -136,6 +136,7 @@ ipcMain.on("overlay:hide", () => {
 });
 
 app.whenReady().then(() => {
+  app.setAppUserModelId("app.memedrop.oasis");
   Menu.setApplicationMenu(null);
   createWindow();
   createTray();

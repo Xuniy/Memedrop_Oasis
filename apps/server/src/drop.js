@@ -4,6 +4,9 @@ import { config } from "./config.js";
 const MAX_TEXT_LENGTH = 500;
 const MIN_DURATION_MS = 1500;
 const MAX_DURATION_MS = 15000;
+const DEFAULT_DURATION_MS = 5000;
+const VIDEO_MIN_DURATION_MS = 30000;
+const VIDEO_MAX_DURATION_MS = 60000;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -41,12 +44,13 @@ export function createDrop(payload) {
   const guildName = cleanString(payload.guildName, 120);
   const channelName = cleanString(payload.channelName, 120);
   const room = normalizeRoom(payload.room);
-  const rawDuration = Number(payload.durationMs || 5000);
-  const durationMs = clamp(
-    Number.isFinite(rawDuration) ? rawDuration : 5000,
-    MIN_DURATION_MS,
-    MAX_DURATION_MS
-  );
+  const rawDuration = Number(payload.durationMs || (videoUrl ? VIDEO_MIN_DURATION_MS : DEFAULT_DURATION_MS));
+  const requestedDuration = Number.isFinite(rawDuration)
+    ? rawDuration
+    : (videoUrl ? VIDEO_MIN_DURATION_MS : DEFAULT_DURATION_MS);
+  const durationMs = videoUrl
+    ? clamp(requestedDuration, VIDEO_MIN_DURATION_MS, VIDEO_MAX_DURATION_MS)
+    : clamp(requestedDuration, MIN_DURATION_MS, MAX_DURATION_MS);
 
   if (!text && !imageUrl && !videoUrl) {
     throw new Error("Drop must include text, imageUrl, or videoUrl.");

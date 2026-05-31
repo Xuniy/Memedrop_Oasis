@@ -190,6 +190,13 @@ function resetMedia() {
   popupVideo.load();
 }
 
+function hidePopup() {
+  clearTimeout(hideTimer);
+  resetMedia();
+  popupEl.hidden = true;
+  window.memedrop.hide();
+}
+
 function getPopupBounds(settings, hasMedia) {
   const size = POPUP_SIZES[settings.popupSize] || POPUP_SIZES.medium;
   return hasMedia ? size.media : size.text;
@@ -229,9 +236,7 @@ function showDrop(drop) {
   });
 
   hideTimer = setTimeout(() => {
-    resetMedia();
-    popupEl.hidden = true;
-    window.memedrop.hide();
+    hidePopup();
   }, Number(drop.durationMs || 5000));
 }
 
@@ -275,3 +280,9 @@ window.memedrop.onOpenSettings(() => {
 
 fillForm(loadSettings());
 connect();
+
+popupVideo.addEventListener("ended", () => {
+  if (!popupVideo.hidden) {
+    hidePopup();
+  }
+});

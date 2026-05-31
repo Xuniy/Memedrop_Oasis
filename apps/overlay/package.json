@@ -18,10 +18,12 @@
     },
     "files": [
       "src/**/*",
+      "build/**/*",
       "package.json"
     ],
     "npmRebuild": false,
     "win": {
+      "icon": "build/icon.ico",
       "target": "portable",
       "signAndEditExecutable": false
     }

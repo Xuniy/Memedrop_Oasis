@@ -110,10 +110,10 @@ Puis dans Discord :
 Ou avec une video :
 
 ```txt
-/drop text: regarde ca video: clip.mp4 duration: 10
+/drop text: regarde ca video: clip.mp4 duration: 60
 ```
 
-La video doit etre un MP4 de 10 MB maximum pour le MVP. L'overlay peut la lire avec son si `Son des videos` est active dans les reglages.
+La video doit etre un MP4 de 10 MB maximum pour le MVP. Une video reste affichee au minimum 30 secondes et jusqu'a 60 secondes si tu mets `duration: 60`. Si la video finit avant la duree choisie, l'overlay se ferme quand la video se termine. L'overlay peut la lire avec son si `Son des videos` est active dans les reglages.
 
 ## Deployer sur Render
 
@@ -188,7 +188,7 @@ Invoke-RestMethod -Method Post `
 
 - Les overlays peuvent ne pas apparaitre au-dessus de certains jeux en fullscreen exclusif. Utilise le mode borderless/windowed fullscreen pour tester.
 - Les images et videos Discord sont envoyees avec leur URL Discord. Pour une version publique, il faudra stocker les medias chez toi, par exemple S3, R2 ou Supabase Storage.
-- Les videos MP4 sont limitees a 10 MB dans le bot pour garder le MVP rapide et compatible avec la limite Discord de base.
+- Les videos MP4 sont limitees a 10 MB dans le bot pour garder le MVP rapide et compatible avec la limite Discord de base. Leur duree d'affichage est comprise entre 30 et 60 secondes, ou plus courte si la video se termine avant.
 - Le token client est partage. Pour une vraie app publique, il faudra des comptes ou des codes d'invitation par groupe.
 
 ## Prochaines etapes conseillees
@@ -198,3 +198,18 @@ Invoke-RestMethod -Method Post `
 3. Ajouter un bouton mute plus pousse cote app.
 4. Stocker les images sur ton propre storage.
 5. Packager l'app Windows avec `npm run build:overlay`.
+
+## Changer l'icone de l'app
+
+L'icone Windows et l'icone de la zone de notification sont dans :
+
+```txt
+apps/overlay/build/icon.ico
+apps/overlay/build/icon.png
+```
+
+Remplace ces deux fichiers par ton logo, puis relance :
+
+```bash
+npm run build:overlay
+```
